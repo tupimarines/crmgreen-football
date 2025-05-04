@@ -1,0 +1,139 @@
+Changelog template:
+## [Date - Time]
+### Component: [file name]
+- Lines changed: [line numbers]
+- Purpose: [brief description]
+- Status: [working/needs testing]
+
+## [May 03, 2025 - 22:45]
+### Component: Redis Server Setup
+- Purpose: Installed and configured Redis server for the application
+- Changes:
+  - Downloaded and installed Redis 5.0.14.1 for Windows
+  - Started Redis server on default port 6379
+  - Verified connection to Django application
+- Status: working
+
+### Component: Django Server
+- Purpose: Fixed server connection issues with i18n URL patterns
+- Changes:
+  - Updated server configuration to bind to all interfaces (0.0.0.0)
+  - Identified correct URL patterns with pt-br language prefix
+- Status: working
+
+## [May 03, 2025 - 23:20]
+### Component: Environment Configuration
+- Purpose: Added environment variables for application configuration
+- Changes:
+  - Created .env file with appropriate settings
+  - Set up API keys and Redis configuration
+- Status: working
+
+### Component: Application Automation
+- Purpose: Created script to automatically start all services
+- Changes:
+  - Created start_app.bat to start Redis and Django app
+  - Configured Redis to be started before Django
+- Status: working
+
+## [May 03, 2025 - 23:45]
+### Component: ODD Table Implementation
+- Purpose: Fixed ODD table view and template issues
+- Changes:
+  - Created missing odd_table.html template
+  - Added custom template filter for dictionary lookups
+  - Modified Redis connection to gracefully handle failures
+  - Created sample data for testing ODD tables
+- Status: working
+
+## [May 04, 2025 - 00:15]
+### Component: Template Fix
+- Purpose: Fixed template extension error in odd_table.html
+- Changes:
+  - Updated template extension from 'central/includes/base.html' to 'base.html'
+  - Aligned with the extension used in other working templates
+- Status: working
+
+## [May 04, 2025 - 00:30]
+### Component: Football API Verification
+- Purpose: Tested and verified Football API connectivity
+- Changes:
+  - Created test_api.py script to test API endpoints
+  - Verified the API key is working correctly
+  - Confirmed successful connections to "League List" and "Today's Matches" endpoints
+- Status: working
+
+## [May 04, 2025 - 01:45]
+### Component: football/painel/central/views.py
+- Lines changed: 642-661
+- Purpose: Added CORS-enabled proxy for Football API requests
+- Status: working
+
+### Component: football/painel/central/urls.py
+- Lines changed: 23, 47
+- Purpose: Added URL pattern for Football API proxy endpoint
+- Status: working
+
+### Component: football/painel/api_test.html
+- Lines changed: 1-70
+- Purpose: Created test interface for Football API proxy
+- Status: working
+
+Update this after every successful change or debugging session.
+
+## SUMMARY OF CHANGES BY PROJECT STEPS
+
+### Environment Setup (Step 1) ✅
+1. **Redis Configuration**
+   - **File**: football/painel/aplicativo/settings.py
+   - **Lines**: 219-238
+   - **Changes**: Added Redis connection with failsafe mechanism (DummyRedis class)
+   
+2. **Environment Variables**
+   - **File**: football/painel/.env
+   - **Lines**: All
+   - **Changes**: Added API keys, database settings, and Redis configuration
+
+3. **Dependency Verification**
+   - **Files**: requirements.txt
+   - **Purpose**: Verified all dependencies are correctly installed
+   
+4. **Database Verification**
+   - **File**: football/painel/verify_data.py
+   - **Lines**: All
+   - **Purpose**: Created script to verify database content and structure
+
+### Initial Verification (Step 2) ✅
+1. **Server Configuration**
+   - **File**: football/painel/aplicativo/settings.py
+   - **Lines**: 25-30
+   - **Changes**: Updated ALLOWED_HOSTS and CSRF settings
+
+2. **API Connection**
+   - **File**: football/painel/central/views.py
+   - **Lines**: 642-661
+   - **Changes**: Created proxy view for Football API requests
+   
+3. **URL Configuration**
+   - **File**: football/painel/central/urls.py
+   - **Lines**: 23, 47
+   - **Changes**: Added URL pattern for API proxy with i18n support
+
+4. **Testing Interface**
+   - **File**: football/painel/api_test.html
+   - **Lines**: All
+   - **Purpose**: Created for testing API connectivity
+
+5. **Application Automation**
+   - **File**: start_app.bat
+   - **Lines**: All
+   - **Purpose**: Created script to automate startup of Redis and Django
+
+## [Current Date]
+### Component: Team Logo Images
+- Purpose: Verified and implemented team logo display in match tables
+- Changes:
+  - Confirmed team logo images are correctly displaying in match tables
+  - Located team logo images at football/painel/central/static/img/teams
+  - Noted that team logos could be improved/corrected with an API in the future
+- Status: working

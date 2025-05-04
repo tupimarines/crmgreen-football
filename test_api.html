@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp API Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .response {
+            margin-top: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>WhatsApp API Test</h1>
+    
+    <div class="card">
+        <h2>Test Connection</h2>
+        <button id="test-connection">Test Connection</button>
+        <div id="test-response" class="response">
+            <pre>Response will appear here...</pre>
+        </div>
+    </div>
+    
+    <div class="card">
+        <h2>Create Instance</h2>
+        <div>
+            <label for="phone-number">Phone Number (with country code):</label>
+            <input type="text" id="phone-number" placeholder="e.g., +5511999999999">
+        </div>
+        <div>
+            <label for="instance-id">Instance ID:</label>
+            <input type="text" id="instance-id" value="test_instance">
+        </div>
+        <button id="create-instance">Create Instance</button>
+        <div id="create-response" class="response">
+            <pre>Response will appear here...</pre>
+        </div>
+    </div>
+    
+    <div class="card">
+        <h2>Get QR Code</h2>
+        <button id="get-qr">Get QR Code</button>
+        <div id="qr-response" class="response">
+            <pre>Response will appear here...</pre>
+        </div>
+        <div id="qr-container" style="text-align: center; margin-top: 20px;"></div>
+    </div>
+    
+    <div class="card">
+        <h2>Check Status</h2>
+        <button id="check-status">Check Status</button>
+        <div id="status-response" class="response">
+            <pre>Response will appear here...</pre>
+        </div>
+    </div>
+    
+    <div class="card">
+        <h2>Delete Instance</h2>
+        <button id="delete-instance">Delete Instance</button>
+        <div id="delete-response" class="response">
+            <pre>Response will appear here...</pre>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // API endpoint
+            const API_URL = window.location.protocol + '//' + window.location.hostname + ':3001';
+            console.log('API URL:', API_URL);
+            
+            // DOM elements
+            const testBtn = document.getElementById('test-connection');
+            const createBtn = document.getElementById('create-instance');
+            const qrBtn = document.getElementById('get-qr');
+            const statusBtn = document.getElementById('check-status');
+            const deleteBtn = document.getElementById('delete-instance');
+            const phoneInput = document.getElementById('phone-number');
+            const instanceInput = document.getElementById('instance-id');
+            const testResp = document.getElementById('test-response').querySelector('pre');
+            const createResp = document.getElementById('create-response').querySelector('pre');
+            const qrResp = document.getElementById('qr-response').querySelector('pre');
+            const qrContainer = document.getElementById('qr-container');
+            const statusResp = document.getElementById('status-response').querySelector('pre');
+            const deleteResp = document.getElementById('delete-response').querySelector('pre');
+            
+            // Event listeners
+            testBtn.addEventListener('click', testConnection);
+            createBtn.addEventListener('click', createInstance);
+            qrBtn.addEventListener('click', getQrCode);
+            statusBtn.addEventListener('click', checkStatus);
+            deleteBtn.addEventListener('click', deleteInstance);
+            
+            // Test connection
+            function testConnection() {
+                testResp.textContent = 'Testing connection...';
+                
+                fetch(`${API_URL}/test`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Check-Credential': 'football_secret_key_2025'
+                    }
+                })
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    testResp.textContent = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    testResp.textContent = 'Error: ' + error.message;
+                });
+            }
+            
+            // Create instance
+            function createInstance() {
+                const phoneNumber = phoneInput.value;
+                const instanceId = instanceInput.value;
+                
+                if (!phoneNumber) {
+                    alert('Please enter a phone number');
+                    return;
+                }
+                
+                createResp.textContent = 'Creating instance...';
+                
+                fetch(`${API_URL}/api/instance/create/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Check-Credential': 'football_secret_key_2025'
+                    },
+                    body: JSON.stringify({
+                        instanceId: instanceId,
+                        phoneNumber: phoneNumber
+                    })
+                })
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    createResp.textContent = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    createResp.textContent = 'Error: ' + error.message;
+                });
+            }
+            
+            // Get QR code
+            function getQrCode() {
+                const instanceId = instanceInput.value;
+                
+                qrResp.textContent = 'Getting QR code...';
+                qrContainer.innerHTML = '';
+                
+                fetch(`${API_URL}/api/instance/qr/?instanceId=${instanceId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Check-Credential': 'football_secret_key_2025'
+                    }
+                })
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    qrResp.textContent = JSON.stringify(data, null, 2);
+                    
+                    if (data.success && data.qr) {
+                        qrContainer.innerHTML = `<img src="${data.qr}" alt="QR Code" />`;
+                    }
+                })
+                .catch(error => {
+                    qrResp.textContent = 'Error: ' + error.message;
+                });
+            }
+            
+            // Check status
+            function checkStatus() {
+                const instanceId = instanceInput.value;
+                
+                statusResp.textContent = 'Checking status...';
+                
+                fetch(`${API_URL}/api/instance/status/?instanceId=${instanceId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Check-Credential': 'football_secret_key_2025'
+                    }
+                })
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    statusResp.textContent = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    statusResp.textContent = 'Error: ' + error.message;
+                });
+            }
+            
+            // Delete instance
+            function deleteInstance() {
+                const instanceId = instanceInput.value;
+                
+                deleteResp.textContent = 'Deleting instance...';
+                
+                fetch(`${API_URL}/api/instance/delete/?instanceId=${instanceId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Check-Credential': 'football_secret_key_2025'
+                    }
+                })
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    deleteResp.textContent = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    deleteResp.textContent = 'Error: ' + error.message;
+                });
+            }
+        });
+    </script>
+</body>
+</html> 
+</html> 
