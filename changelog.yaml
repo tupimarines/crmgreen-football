@@ -96,6 +96,16 @@ Changelog template:
   - Updated fallback value for FOOTBALL_API_KEY environment variable
 - Status: needs testing
 
+## [May 04, 2025 - 21:45]
+### Component: Team Logo API Integration
+- Purpose: Fetch team logos from Football API instead of using local placeholders
+- Changes:
+  - Updated DashboardView to use API-provided team logos
+  - Modified format_team_image template filter to prioritize API URLs
+  - Updated GameListView to use the same approach for team logos
+  - Improved fallback mechanisms for when API doesn't provide logos
+- Status: needs testing
+
 Update this after every successful change or debugging session.
 
 ## SUMMARY OF CHANGES BY PROJECT STEPS
