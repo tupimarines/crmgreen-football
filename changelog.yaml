@@ -106,6 +106,17 @@ Changelog template:
   - Improved fallback mechanisms for when API doesn't provide logos
 - Status: needs testing
 
+## [May 04, 2025 - 22:10]
+### Component: Team Logo Display Fix
+- Purpose: Fix issues with team logo display
+- Changes:
+  - Fixed team logo filename generation to match existing files
+  - Added explicit "england" as default country for teams without country info
+  - Simplified template filter to use direct URL approach
+  - Improved handling of team names with special characters
+  - Ensured consistent behavior between GameListView and DashboardView
+- Status: working
+
 Update this after every successful change or debugging session.
 
 ## SUMMARY OF CHANGES BY PROJECT STEPS
