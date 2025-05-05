@@ -12,8 +12,9 @@ teams_dirs = [
 for dir_path in teams_dirs:
     os.makedirs(dir_path, exist_ok=True)
 
-# List of team image URLs from error logs
+# Updated list of team image URLs from error logs
 team_urls = [
+    # Original team logos
     "andorra-inter-club-descaldes.png",
     "andorra-fc-ordino.png",
     "andorra-don-denis-fc-santa-coloma.png",
@@ -96,7 +97,45 @@ team_urls = [
     "argentina-ca-river-plate.png",
     "argentina-club-atletico-velez-sarsfield.png",
     "brazil-operario-ferroviario-ec.png",
-    "brazil-america-fc-minas-gerais.png"
+    "brazil-america-fc-minas-gerais.png",
+    
+    # New team logos from console errors
+    "england-afc-fylde.png",
+    "england-barnet-fc.png",
+    "england-aldershot-town-fc.png",
+    "england-altrincham-fc.png",
+    "england-braintree-town-fc.png",
+    "england-rochdale-afc.png",
+    "england-tamworth-fc.png",
+    "england-yeovil-town-fc.png",
+    "england-york-city-fc.png",
+    "england-gateshead-fc.png",
+    "england-eastleigh-fc.png",
+    "england-hartlepool-united-fc.png",
+    "england-southend-united-fc.png",
+    "england-forest-green-rovers-fc.png",
+    "england-ebbsfleet-united-fc.png",
+    "england-maidenhead-united-fc.png",
+    "england-boston-united-fc.png",
+    "england-nottingham-forest-fc.png",
+    "england-fc-halifax-town.png",
+    "england-solihull-moors-fc.png",
+    "england-oldham-athletic-afc.png",
+    "england-crystal-palace-fc.png",
+    "england-dagenham-redbridge-fc.png",
+    "england-wealdstone-fc.png",
+    "england-sutton-united-fc.png",
+    "england-woking-fc.png",
+    "brazil-mirassol-futebol-clube.png",
+    "brazil-clube-atletico-bragantino.png",
+    "brazil-goias-ec.png",
+    "brazil-avai-fc.png",
+    "brazil-londrina-ec.png",
+    "brazil-sao-bernardo-fc.png",
+    "brazil-figueirense-fc.png",
+    "brazil-sociedade-esportiva-e-recreativa-caxias-do-sul.png",
+    "brazil-ec-juventude.png",
+    "brazil-ca-mineiro.png"
 ]
 
 def generate_team_logo(team_filename):
