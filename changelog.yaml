@@ -88,6 +88,14 @@ Changelog template:
   - Fixed 404 errors for missing team logos in dashboard view
 - Status: working
 
+## [May 04, 2025 - 21:30]
+### Component: Football API Configuration
+- Purpose: Updated Football API key
+- Changes:
+  - Changed API key in settings.py to the new subscription key
+  - Updated fallback value for FOOTBALL_API_KEY environment variable
+- Status: needs testing
+
 Update this after every successful change or debugging session.
 
 ## SUMMARY OF CHANGES BY PROJECT STEPS
